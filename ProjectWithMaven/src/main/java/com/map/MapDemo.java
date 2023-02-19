@@ -1,0 +1,95 @@
+package com.map;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.transaction.Transaction;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+public class MapDemo {
+	public static void main(String[] args) {
+		
+		 System.out.println( "project started..." );
+	        
+	        Configuration cfg = new Configuration();
+	        cfg.configure("hibernate.cfg.xml");
+	        SessionFactory factory = cfg.buildSessionFactory();
+	        
+//	        //creating question 
+//	        
+//	        Question question = new Question();
+//	        question.setQuestionId(1212);
+//	        question.setQuestion("what is java");
+//	        
+//	        //creating answer
+//	        
+//	        Answer answer = new Answer();
+//	        answer.setAnswerId(343);
+//	        answer.setAnswer("java is programming language");
+//	        answer.setQuestion(question);
+//	      
+//	        Answer answer1 = new Answer();
+//	        answer1.setAnswerId(344);
+//	        answer1.setAnswer("with the help of java we can create software");
+//	        answer1.setQuestion(question);
+//	        
+//	        Answer answer2 = new Answer();
+//	        answer2.setAnswerId(345);
+//	        answer2.setAnswer("java has diffrent type of framework");
+//	        answer2.setQuestion(question);
+//	        
+//	        List<Answer> list = new ArrayList<Answer>();
+//	        list.add(answer);
+//	        list.add(answer1);
+//	        list.add(answer2);
+//	        
+//	        question.setAnswer(list);
+//	    
+	        
+	        //creating question 
+	        
+//	        Question question1 = new Question();
+//	        question1.setQuestionId(242);
+//	        question1.setQuestion("what is collection framework");
+//	        
+//	        //creating answer
+//	        
+//	        Answer answer1 = new Answer();
+//	        answer1.setAnswerId(344);
+//	        answer1.setAnswer("api to work with objects in java");
+//	        answer.setQuestion(question1);
+//	        question1.setAnswer(answer1);
+	        
+	        //session save
+	        Session s= factory.openSession();
+	      org.hibernate.Transaction tx =s.beginTransaction();
+	        
+//	      	s.save(question);
+//	      	s.save(answer);
+//	      	s.save(question1);
+//	      	s.save(answer1);
+//	      	tx.commit();
+	      
+	      //save list of address
+//	      	s.save(question);
+//	      	s.save(answer);
+//	      	s.save(answer1);
+//	      	s.save(answer2);
+//	  		tx.commit();
+	   //   	fetching
+	      	Question q = s.get(Question.class, 1212);
+	      	System.out.println(q.getQuestion());
+	      	
+	      	for(Answer a :q.getAnswer()) {
+	      		
+	      		System.out.println(a.getAnswer());
+	      	}
+	        s.close();
+	        
+	        factory.close();
+		
+	}
+}

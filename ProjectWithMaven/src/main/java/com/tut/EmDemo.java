@@ -1,0 +1,54 @@
+package com.tut;
+
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
+import javax.transaction.Transaction;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+public class EmDemo {
+
+	public static void main(String[] args) throws SecurityException, RollbackException, HeuristicMixedException, HeuristicRollbackException, SystemException {
+		
+		 Configuration cfg = new Configuration();
+	        cfg.configure("hibernate.cfg.xml");
+	        SessionFactory factory = cfg.buildSessionFactory();
+	        
+	        Student student = new Student();
+	        student.setId(123);
+	        student.setName("arbab");
+	        student.setCity("karachi");
+	        
+	        Certificate certificate = new Certificate();
+	        certificate.setCourse("android");
+	        certificate.setDuration("2 month");
+	        student.setCertificate(certificate);
+	        
+	        
+	        Student student1 = new Student();
+	        student1.setId(12);
+	        student1.setName("adnan");
+	        student1.setCity("islamabad");
+	        
+	        Certificate certificate1 = new Certificate();
+	        certificate1.setCourse("java");
+	        certificate1.setDuration("3 month");
+	        student1.setCertificate(certificate1);
+	        
+	        Session session= factory.openSession();
+	        org.hibernate.Transaction tx = session.beginTransaction();
+	        //objects save
+	        
+	        session.save(student);
+	        session.save(student1);
+	        
+	        tx.commit();
+	        session.close();
+	        
+	       factory.close();
+	}
+}

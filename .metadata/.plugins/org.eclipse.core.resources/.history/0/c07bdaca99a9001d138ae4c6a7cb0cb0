@@ -1,0 +1,9 @@
+package com.tut;
+
+import javax.persistence.Embeddable;
+
+@Embeddable
+public class Certificate {
+
+	
+}

@@ -1,0 +1,43 @@
+package state;
+
+import javax.transaction.Transaction;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import com.tut.Certificate;
+import com.tut.Student;
+
+public class StateDemo {
+
+	public static void main(String[] args) {
+		// practical of hibernate obj staes
+		//transient
+		//persistent
+		//detached
+		//removed
+		System.out.println("Example : ");
+		
+		SessionFactory f = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+		
+		//creating student object
+		Student student = new Student();
+		student.setId(1414);
+		student.setName("adnan");
+		student.setCity("karachi");
+		student.setCertificate(new Certificate("java hibernate course","2 month"));
+		//student :Transient state
+		
+		Session s=f.openSession();
+		org.hibernate.Transaction tx=s.beginTransaction();
+		
+		s.save(student);
+		//persistent state - session,database
+		
+		tx.commit();
+		
+		f.close();
+	}
+
+}

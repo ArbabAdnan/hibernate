@@ -1,0 +1,15 @@
+package state;
+
+public class StateDemo {
+
+	public static void main(String[] args) {
+		// practical of hibernate obj staes
+		//transient
+		//persistent
+		//detached
+		//removed
+		System.out.println("Example : ");
+
+	}
+
+}
